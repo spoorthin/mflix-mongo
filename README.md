@@ -5,4 +5,4 @@ cd mflix-mongo
 
 npm start
 
-localhost: 5000/status/
+localhost: 5000
