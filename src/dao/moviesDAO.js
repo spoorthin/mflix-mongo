@@ -315,18 +315,18 @@ export default class MoviesDAO {
     ]
     return await movies.aggregate(pipeline).next()
     } catch (e) {
-      /**
-      Ticket: Error Handling
-
-      Handle the error that occurs when an invalid ID is passed to this method.
-      When this specific error is thrown, the method should return `null`.
-      */
-
-      // TODO Ticket: Error Handling
-      // Catch the InvalidId error by string matching, and then handle it.
-      console.error(`Something went wrong in getMovieByID: ${e}`)
-      throw e
+    if (
+      e
+        .toString()
+        .startsWith(
+          "Error: Argument passed in must be a single String of 12 bytes or a string of 24 hex characters",
+        )
+    ) {
+      return null
     }
+    console.error(`Something went wrong in getMovieByID: ${e}`)
+    throw e
+  }
   }
 }
 
